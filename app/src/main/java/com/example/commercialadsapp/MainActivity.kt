@@ -30,7 +30,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.commercialadsapp.ui.theme.CommercialAdsAppTheme
 
-// Product data class
+
 data class Product(
     val id: Int,
     val imageRes: Int,
@@ -75,20 +75,21 @@ fun HomeScreen(navController: NavController) {
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
-            .windowInsetsPadding(WindowInsets.statusBars) // Added here
+            .windowInsetsPadding(WindowInsets.statusBars)
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text("Welcome to Our Services!", fontSize = 20.sp, fontWeight = FontWeight.Bold)
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Search Bar
+
         BasicTextField(
             value = searchQuery,
             onValueChange = { searchQuery = it },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(8.dp),
+            singleLine = true,
             decorationBox = { innerTextField ->
                 Row(
                     Modifier
@@ -160,7 +161,7 @@ fun ProductScreen(navController: NavController, products: List<Product>) {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .windowInsetsPadding(WindowInsets.statusBars) // Added here
+            .windowInsetsPadding(WindowInsets.statusBars)
     ) {
         items(products) { product ->
             ProductCard(
@@ -253,7 +254,7 @@ fun ProductDetailScreen(navController: NavController, productId: Int?) {
             .fillMaxSize()
             .padding(16.dp)
             .verticalScroll(rememberScrollState())
-            .windowInsetsPadding(WindowInsets.statusBars) // Added here
+            .windowInsetsPadding(WindowInsets.statusBars)
     ) {
         product?.let {
             Text(it.name, fontSize = 24.sp, fontWeight = FontWeight.Bold)
