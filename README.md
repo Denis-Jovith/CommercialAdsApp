@@ -1,4 +1,3 @@
-# CommercialAdsApp
 # Commercial Ads Application
 
 ## Description
@@ -29,6 +28,9 @@ The **Commercial Ads Application** is a mobile app built using **Jetpack Compose
 | 9    | Elia M. Kabehe            | 22100533350014     |
 | 10   | Tunsume E. Mwakyusa       | 22100533350071     |
 | 11   | Festo K. Magembe          | 22100533350027     |
+
+## About Us
+We are **third-year Computer Science students** at **Mbeya University of Science and Technology** (MUST). This project was developed as part of our coursework in the module **CS 8306 - Application Development for Mobile Devices**. We would like to extend our sincere thanks to our esteemed instructor **Mr. George Raphael Kitula**, whose guidance and mentorship have been invaluable throughout the development of this application.
 
 ## Setup Instructions
 
