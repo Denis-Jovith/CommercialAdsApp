@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -58,6 +59,10 @@ fun CommercialAdsApp() {
         composable("phone_accessories") { ProductScreenPhoneAccessories(navController) }
         composable("furniture_services") { ProductScreenFurniture(navController) }
         composable("real_estate") { ProductScreenRealEstate(navController) }
+        composable("product_detail/{productName}") { backStackEntry ->
+            val productName = backStackEntry.arguments?.getString("productName")
+            ProductDetailScreen(productName = productName ?: "", navController = navController)
+        }
     }
 }
 
@@ -127,12 +132,15 @@ fun HomeScreen(navController: NavController) {
 }
 
 @Composable
-fun ProductCard(product: Product) {
+fun ProductCard(product: Product, navController: NavController) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
             .background(Color.White)
+            .clickable {
+                navController.navigate("product_detail/${product.name}")
+            }
     ) {
         Row(modifier = Modifier.padding(16.dp)) {
             Image(
@@ -154,15 +162,65 @@ fun ProductCard(product: Product) {
 }
 
 @Composable
+fun ProductDetailScreen(productName: String, navController: NavController,) {
+    val product = getProductByName(productName)
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+            .windowInsetsPadding(WindowInsets.statusBars)
+    ) {
+        Text(
+            text = product?.name ?: "Product Not Found",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.align(Alignment.CenterHorizontally)
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Image(
+            painter = painterResource(id = product?.imageRes ?: R.drawable.iphone_image),
+            contentDescription = product?.name,
+            modifier = Modifier.fillMaxWidth().height(300.dp)
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Text("Original Price: ${product?.originalPrice}", color = Color.Gray)
+        Text("Discounted Price: ${product?.discountedPrice}", fontWeight = FontWeight.Bold)
+        Spacer(modifier = Modifier.height(8.dp))
+        Text("Offer: ${product?.offer}", color = Color.Red)
+        Spacer(modifier = Modifier.height(16.dp))
+
+        OutlinedButton(
+            onClick = { navController.popBackStack() },
+            modifier = Modifier.align(Alignment.CenterHorizontally)
+        ) {
+            Text("Back")
+        }
+    }
+}
+
+fun getProductByName(name: String): Product? {
+    val products = listOf(
+        Product(R.drawable.iphone_image, "iPhone 16 Pro", "100", "93", "Free Protector"),
+        Product(R.drawable.google_pixel_image, "Google Pixel 7", "80", "75", "Free Case"),
+        Product(R.drawable.table_image, "Dining Table", "700", "630", "Buy 1 Get 1 Chair"),
+        Product(R.drawable.bed_image, "Sofa Set", "500", "450", "10% Off"),
+        Product(R.drawable.house_image, "2 BHK Apartment", "100000", "95000", "5% Discount"),
+        // Add other products here...
+    )
+    return products.find { it.name == name }
+}
+
+@Composable
 fun ProductScreenPhoneAccessories(navController: NavController) {
     val products = listOf(
         Product(R.drawable.iphone_image, "iPhone 16 Pro", "100", "93", "Free Protector"),
         Product(R.drawable.google_pixel_image, "Google Pixel 7", "80", "75", "Free Case"),
         Product(R.drawable.google_pixel_image, "Google Pixel 7", "80", "75", "Free Case"),
-        Product(R.drawable.google_pixel_image, "Google Pixel 7", "80", "75", "Free Case"),
-        Product(R.drawable.iphone_image, "iPhone 16 Pro", "100", "93", "Free Protector"),
-        Product(R.drawable.iphone_image, "iPhone 16 Pro", "100", "93", "Free Protector"),
-        Product(R.drawable.iphone_image, "iPhone 16 Pro", "100", "93", "Free Protector")
+        Product(R.drawable.google_pixel_image, "Google Pixel 7", "80", "75", "Free Case")
     )
 
     LazyColumn(
@@ -172,7 +230,7 @@ fun ProductScreenPhoneAccessories(navController: NavController) {
             .windowInsetsPadding(WindowInsets.statusBars)
     ) {
         items(products) { product ->
-            ProductCard(product)
+            ProductCard(product, navController)
         }
     }
 }
@@ -193,7 +251,7 @@ fun ProductScreenFurniture(navController: NavController) {
             .windowInsetsPadding(WindowInsets.statusBars)
     ) {
         items(products) { product ->
-            ProductCard(product)
+            ProductCard(product, navController)
         }
     }
 }
@@ -214,7 +272,7 @@ fun ProductScreenRealEstate(navController: NavController) {
             .windowInsetsPadding(WindowInsets.statusBars)
     ) {
         items(products) { product ->
-            ProductCard(product)
+            ProductCard(product, navController)
         }
     }
 }
