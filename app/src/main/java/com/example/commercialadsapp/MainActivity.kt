@@ -7,6 +7,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
@@ -41,7 +42,7 @@ class MainActivity : ComponentActivity() {
         window.statusBarColor = android.graphics.Color.TRANSPARENT
         setContent {
             CommercialAdsAppTheme {
-                Surface () {
+                Surface(modifier = Modifier.fillMaxSize()) {
                     CommercialAdsApp()
                 }
             }
@@ -118,7 +119,6 @@ fun HomeScreen(navController: NavController) {
             Spacer(modifier = Modifier.height(32.dp))
         }
 
-
         Footer(modifier = Modifier
             .align(Alignment.BottomCenter)
             .padding(bottom = 0.dp)
@@ -127,13 +127,7 @@ fun HomeScreen(navController: NavController) {
 }
 
 @Composable
-fun ProductCard(
-    imageRes: Int,
-    name: String,
-    originalPrice: String,
-    discountedPrice: String,
-    offer: String
-) {
+fun ProductCard(product: Product) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -142,18 +136,18 @@ fun ProductCard(
     ) {
         Row(modifier = Modifier.padding(16.dp)) {
             Image(
-                painter = painterResource(id = imageRes),
-                contentDescription = name,
+                painter = painterResource(id = product.imageRes),
+                contentDescription = product.name,
                 modifier = Modifier.size(64.dp)
             )
             Spacer(modifier = Modifier.width(16.dp))
             Column {
-                Text(name, fontWeight = FontWeight.Bold, fontSize = 18.sp)
+                Text(product.name, fontWeight = FontWeight.Bold, fontSize = 18.sp)
                 Spacer(modifier = Modifier.height(8.dp))
-                Text("Original Price: $originalPrice", color = Color.Gray)
-                Text("Discounted Price: $discountedPrice", fontWeight = FontWeight.Bold)
+                Text("Original Price: ${product.originalPrice}", color = Color.Gray)
+                Text("Discounted Price: ${product.discountedPrice}", fontWeight = FontWeight.Bold)
                 Spacer(modifier = Modifier.height(8.dp))
-                Text("Offer: $offer", color = Color.Red)
+                Text("Offer: ${product.offer}", color = Color.Red)
             }
         }
     }
@@ -161,170 +155,66 @@ fun ProductCard(
 
 @Composable
 fun ProductScreenPhoneAccessories(navController: NavController) {
+    val products = listOf(
+        Product(R.drawable.iphone_image, "iPhone 16 Pro", "100", "93", "Free Protector"),
+        Product(R.drawable.google_pixel_image, "Google Pixel 7", "80", "75", "Free Case"),
+        Product(R.drawable.google_pixel_image, "Google Pixel 7", "80", "75", "Free Case"),
+        Product(R.drawable.google_pixel_image, "Google Pixel 7", "80", "75", "Free Case"),
+        Product(R.drawable.iphone_image, "iPhone 16 Pro", "100", "93", "Free Protector"),
+        Product(R.drawable.iphone_image, "iPhone 16 Pro", "100", "93", "Free Protector"),
+        Product(R.drawable.iphone_image, "iPhone 16 Pro", "100", "93", "Free Protector")
+    )
+
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
             .windowInsetsPadding(WindowInsets.statusBars)
     ) {
-        item(1){
-            ProductCard(
-                imageRes = R.drawable.iphone_image,
-                name = "iPhone 16 Pro",
-                originalPrice = "100",
-                discountedPrice = "93",
-                offer = "Free Protector"
-            )
-        }
-        item(2){
-            ProductCard(
-                imageRes = R.drawable.google_pixel_image,
-                name = "Google Pixel 7",
-                originalPrice = "80",
-                discountedPrice = "75",
-                offer = "Free Case"
-            )
-        }
-        item(3){
-            ProductCard(
-                imageRes = R.drawable.google_pixel_image,
-                name = "Google Pixel 7",
-                originalPrice = "80",
-                discountedPrice = "75",
-                offer = "Free Case"
-            )
-        }
-        item(4){
-            ProductCard(
-                imageRes = R.drawable.google_pixel_image,
-                name = "Google Pixel 7",
-                originalPrice = "80",
-                discountedPrice = "75",
-                offer = "Free Case"
-            )
-
-        }
-        item(5){
-            ProductCard(
-                imageRes = R.drawable.iphone_image,
-                name = "iPhone 16 Pro",
-                originalPrice = "100",
-                discountedPrice = "93",
-                offer = "Free Protector"
-            )
-        }
-        item(6){
-            ProductCard(
-                imageRes = R.drawable.iphone_image,
-                name = "iPhone 16 Pro",
-                originalPrice = "100",
-                discountedPrice = "93",
-                offer = "Free Protector"
-            )
-        }
-        item(7){
-            ProductCard(
-                imageRes = R.drawable.iphone_image,
-                name = "iPhone 16 Pro",
-                originalPrice = "100",
-                discountedPrice = "93",
-                offer = "Free Protector"
-            )
+        items(products) { product ->
+            ProductCard(product)
         }
     }
-
 }
 
 @Composable
 fun ProductScreenFurniture(navController: NavController) {
+    val products = listOf(
+        Product(R.drawable.table_image, "Dining Table", "700", "630", "Buy 1 Get 1 Chair"),
+        Product(R.drawable.bed_image, "Sofa Set", "500", "450", "10% Off"),
+        Product(R.drawable.bed_image, "Sofa Set", "500", "450", "10% Off"),
+        Product(R.drawable.bed_image, "Sofa Set", "500", "450", "10% Off")
+    )
+
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
             .windowInsetsPadding(WindowInsets.statusBars)
     ) {
-        item(1){
-            ProductCard(
-                imageRes = R.drawable.table_image,
-                name = "Dining Table",
-                originalPrice = "700",
-                discountedPrice = "630",
-                offer = "Buy 1 Get 1 Chair"
-            )
-        }
-        item(2){
-            ProductCard(
-                imageRes = R.drawable.bed_image,
-                name = "Sofa Set",
-                originalPrice = "500",
-                discountedPrice = "450",
-                offer = "10% Off"
-            )
-        }
-       item(3){
-           ProductCard(
-               imageRes = R.drawable.bed_image,
-               name = "Sofa Set",
-               originalPrice = "500",
-               discountedPrice = "450",
-               offer = "10% Off"
-           )
-       }
-        item(4){
-            ProductCard(
-                imageRes = R.drawable.bed_image,
-                name = "Sofa Set",
-                originalPrice = "500",
-                discountedPrice = "450",
-                offer = "10% Off"
-            )
+        items(products) { product ->
+            ProductCard(product)
         }
     }
 }
 
 @Composable
 fun ProductScreenRealEstate(navController: NavController) {
+    val products = listOf(
+        Product(R.drawable.house_image, "2 BHK Apartment", "100000", "95000", "5% Discount"),
+        Product(R.drawable.house_image, "Commercial Office Space", "200000", "190000", "Includes Parking"),
+        Product(R.drawable.house_image, "Commercial Office Space", "200000", "190000", "Includes Parking"),
+        Product(R.drawable.house_image, "Commercial Office Space", "200000", "190000", "Includes Parking")
+    )
+
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
             .windowInsetsPadding(WindowInsets.statusBars)
     ) {
-        item(1){
-            ProductCard(
-                imageRes = R.drawable.house_image,
-                name = "2 BHK Apartment",
-                originalPrice = "100000",
-                discountedPrice = "95000",
-                offer = "5% Discount"
-            )
-        }
-        item(2){
-            ProductCard(
-                imageRes = R.drawable.house_image,
-                name = "Commercial Office Space",
-                originalPrice = "200000",
-                discountedPrice = "190000",
-                offer = "Includes Parking"
-            )
-        }
-        item(3){
-            ProductCard(
-                imageRes = R.drawable.house_image,
-                name = "Commercial Office Space",
-                originalPrice = "200000",
-                discountedPrice = "190000",
-                offer = "Includes Parking"
-            )
-        }
-        item(4){
-            ProductCard(
-                imageRes = R.drawable.house_image,
-                name = "Commercial Office Space",
-                originalPrice = "200000",
-                discountedPrice = "190000",
-                offer = "Includes Parking"
-            )
+        items(products) { product ->
+            ProductCard(product)
         }
     }
 }
