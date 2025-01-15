@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
@@ -160,119 +161,171 @@ fun ProductCard(
 
 @Composable
 fun ProductScreenPhoneAccessories(navController: NavController) {
-    Column(
+    LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
             .windowInsetsPadding(WindowInsets.statusBars)
     ) {
-        ProductCard(
-            imageRes = R.drawable.iphone_image,
-            name = "iPhone 16 Pro",
-            originalPrice = "100",
-            discountedPrice = "93",
-            offer = "Free Protector"
-        )
-        ProductCard(
-            imageRes = R.drawable.google_pixel_image,
-            name = "Google Pixel 7",
-            originalPrice = "80",
-            discountedPrice = "75",
-            offer = "Free Case"
-        )
-        ProductCard(
-            imageRes = R.drawable.google_pixel_image,
-            name = "Google Pixel 7",
-            originalPrice = "80",
-            discountedPrice = "75",
-            offer = "Free Case"
-        )
-        ProductCard(
-            imageRes = R.drawable.google_pixel_image,
-            name = "Google Pixel 7",
-            originalPrice = "80",
-            discountedPrice = "75",
-            offer = "Free Case"
-        )
+        item(1){
+            ProductCard(
+                imageRes = R.drawable.iphone_image,
+                name = "iPhone 16 Pro",
+                originalPrice = "100",
+                discountedPrice = "93",
+                offer = "Free Protector"
+            )
+        }
+        item(2){
+            ProductCard(
+                imageRes = R.drawable.google_pixel_image,
+                name = "Google Pixel 7",
+                originalPrice = "80",
+                discountedPrice = "75",
+                offer = "Free Case"
+            )
+        }
+        item(3){
+            ProductCard(
+                imageRes = R.drawable.google_pixel_image,
+                name = "Google Pixel 7",
+                originalPrice = "80",
+                discountedPrice = "75",
+                offer = "Free Case"
+            )
+        }
+        item(4){
+            ProductCard(
+                imageRes = R.drawable.google_pixel_image,
+                name = "Google Pixel 7",
+                originalPrice = "80",
+                discountedPrice = "75",
+                offer = "Free Case"
+            )
+
+        }
+        item(5){
+            ProductCard(
+                imageRes = R.drawable.iphone_image,
+                name = "iPhone 16 Pro",
+                originalPrice = "100",
+                discountedPrice = "93",
+                offer = "Free Protector"
+            )
+        }
+        item(6){
+            ProductCard(
+                imageRes = R.drawable.iphone_image,
+                name = "iPhone 16 Pro",
+                originalPrice = "100",
+                discountedPrice = "93",
+                offer = "Free Protector"
+            )
+        }
+        item(7){
+            ProductCard(
+                imageRes = R.drawable.iphone_image,
+                name = "iPhone 16 Pro",
+                originalPrice = "100",
+                discountedPrice = "93",
+                offer = "Free Protector"
+            )
+        }
     }
 
 }
 
 @Composable
 fun ProductScreenFurniture(navController: NavController) {
-    Column(
+    LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
             .windowInsetsPadding(WindowInsets.statusBars)
     ) {
-        ProductCard(
-            imageRes = R.drawable.table_image,
-            name = "Dining Table",
-            originalPrice = "700",
-            discountedPrice = "630",
-            offer = "Buy 1 Get 1 Chair"
-        )
-        ProductCard(
-            imageRes = R.drawable.bed_image,
-            name = "Sofa Set",
-            originalPrice = "500",
-            discountedPrice = "450",
-            offer = "10% Off"
-        )
-        ProductCard(
-            imageRes = R.drawable.bed_image,
-            name = "Sofa Set",
-            originalPrice = "500",
-            discountedPrice = "450",
-            offer = "10% Off"
-        )
-        ProductCard(
-            imageRes = R.drawable.bed_image,
-            name = "Sofa Set",
-            originalPrice = "500",
-            discountedPrice = "450",
-            offer = "10% Off"
-        )
+        item(1){
+            ProductCard(
+                imageRes = R.drawable.table_image,
+                name = "Dining Table",
+                originalPrice = "700",
+                discountedPrice = "630",
+                offer = "Buy 1 Get 1 Chair"
+            )
+        }
+        item(2){
+            ProductCard(
+                imageRes = R.drawable.bed_image,
+                name = "Sofa Set",
+                originalPrice = "500",
+                discountedPrice = "450",
+                offer = "10% Off"
+            )
+        }
+       item(3){
+           ProductCard(
+               imageRes = R.drawable.bed_image,
+               name = "Sofa Set",
+               originalPrice = "500",
+               discountedPrice = "450",
+               offer = "10% Off"
+           )
+       }
+        item(4){
+            ProductCard(
+                imageRes = R.drawable.bed_image,
+                name = "Sofa Set",
+                originalPrice = "500",
+                discountedPrice = "450",
+                offer = "10% Off"
+            )
+        }
     }
 }
 
 @Composable
 fun ProductScreenRealEstate(navController: NavController) {
-    Column(
+    LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
             .windowInsetsPadding(WindowInsets.statusBars)
     ) {
-        ProductCard(
-            imageRes = R.drawable.house_image,
-            name = "2 BHK Apartment",
-            originalPrice = "100000",
-            discountedPrice = "95000",
-            offer = "5% Discount"
-        )
-        ProductCard(
-            imageRes = R.drawable.house_image,
-            name = "Commercial Office Space",
-            originalPrice = "200000",
-            discountedPrice = "190000",
-            offer = "Includes Parking"
-        )
-        ProductCard(
-            imageRes = R.drawable.house_image,
-            name = "Commercial Office Space",
-            originalPrice = "200000",
-            discountedPrice = "190000",
-            offer = "Includes Parking"
-        )
-        ProductCard(
-            imageRes = R.drawable.house_image,
-            name = "Commercial Office Space",
-            originalPrice = "200000",
-            discountedPrice = "190000",
-            offer = "Includes Parking"
-        )
+        item(1){
+            ProductCard(
+                imageRes = R.drawable.house_image,
+                name = "2 BHK Apartment",
+                originalPrice = "100000",
+                discountedPrice = "95000",
+                offer = "5% Discount"
+            )
+        }
+        item(2){
+            ProductCard(
+                imageRes = R.drawable.house_image,
+                name = "Commercial Office Space",
+                originalPrice = "200000",
+                discountedPrice = "190000",
+                offer = "Includes Parking"
+            )
+        }
+        item(3){
+            ProductCard(
+                imageRes = R.drawable.house_image,
+                name = "Commercial Office Space",
+                originalPrice = "200000",
+                discountedPrice = "190000",
+                offer = "Includes Parking"
+            )
+        }
+        item(4){
+            ProductCard(
+                imageRes = R.drawable.house_image,
+                name = "Commercial Office Space",
+                originalPrice = "200000",
+                discountedPrice = "190000",
+                offer = "Includes Parking"
+            )
+        }
     }
 }
 
