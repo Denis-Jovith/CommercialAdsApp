@@ -33,7 +33,7 @@ data class Product(
     val name: String,
     val originalPrice: String,
     val discountedPrice: String,
-    val offer: String
+    val offer: String,
 )
 
 class MainActivity : ComponentActivity() {
@@ -68,7 +68,9 @@ fun CommercialAdsApp() {
 
 @Composable
 fun HomeScreen(navController: NavController) {
-    Box(modifier = Modifier.fillMaxSize().windowInsetsPadding(WindowInsets.statusBars)) {
+    Box(modifier = Modifier
+        .fillMaxSize()
+        .windowInsetsPadding(WindowInsets.statusBars)) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -124,9 +126,10 @@ fun HomeScreen(navController: NavController) {
             Spacer(modifier = Modifier.height(32.dp))
         }
 
-        Footer(modifier = Modifier
-            .align(Alignment.BottomCenter)
-            .padding(bottom = 0.dp)
+        Footer(
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .padding(bottom = 0.dp)
         )
     }
 }
@@ -162,7 +165,7 @@ fun ProductCard(product: Product, navController: NavController) {
 }
 
 @Composable
-fun ProductDetailScreen(productName: String, navController: NavController,) {
+fun ProductDetailScreen(productName: String, navController: NavController) {
     val product = getProductByName(productName)
 
     Column(
@@ -182,7 +185,9 @@ fun ProductDetailScreen(productName: String, navController: NavController,) {
         Image(
             painter = painterResource(id = product?.imageRes ?: R.drawable.iphone_image),
             contentDescription = product?.name,
-            modifier = Modifier.fillMaxWidth().height(300.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(300.dp)
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -199,7 +204,9 @@ fun ProductDetailScreen(productName: String, navController: NavController,) {
         ) {
             Text("Back")
         }
+
     }
+
 }
 
 fun getProductByName(name: String): Product? {
@@ -220,18 +227,33 @@ fun ProductScreenPhoneAccessories(navController: NavController) {
         Product(R.drawable.iphone_image, "iPhone 16 Pro", "100", "93", "Free Protector"),
         Product(R.drawable.google_pixel_image, "Google Pixel 7", "80", "75", "Free Case"),
         Product(R.drawable.google_pixel_image, "Google Pixel 7", "80", "75", "Free Case"),
+        Product(R.drawable.google_pixel_image, "Google Pixel 7", "80", "75", "Free Case"),
+        Product(R.drawable.google_pixel_image, "Google Pixel 7", "80", "75", "Free Case"),
+        Product(R.drawable.google_pixel_image, "Google Pixel 7", "80", "75", "Free Case"),
         Product(R.drawable.google_pixel_image, "Google Pixel 7", "80", "75", "Free Case")
     )
 
-    LazyColumn(
+    Box(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
             .windowInsetsPadding(WindowInsets.statusBars)
     ) {
-        items(products) { product ->
-            ProductCard(product, navController)
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+                .windowInsetsPadding(WindowInsets.statusBars)
+        ) {
+            items(products) { product ->
+                ProductCard(product, navController)
+            }
         }
+        Footer(
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .padding(bottom = 0.dp)
+        )
     }
 }
 
@@ -244,38 +266,83 @@ fun ProductScreenFurniture(navController: NavController) {
         Product(R.drawable.bed_image, "Sofa Set", "500", "450", "10% Off")
     )
 
-    LazyColumn(
+    Box(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
             .windowInsetsPadding(WindowInsets.statusBars)
     ) {
-        items(products) { product ->
-            ProductCard(product, navController)
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+                .windowInsetsPadding(WindowInsets.statusBars)
+        ) {
+            items(products) { product ->
+                ProductCard(product, navController)
+            }
+
+
         }
+        Footer(
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .padding(bottom = 0.dp)
+        )
     }
+
+
 }
 
 @Composable
 fun ProductScreenRealEstate(navController: NavController) {
     val products = listOf(
         Product(R.drawable.house_image, "2 BHK Apartment", "100000", "95000", "5% Discount"),
-        Product(R.drawable.house_image, "Commercial Office Space", "200000", "190000", "Includes Parking"),
-        Product(R.drawable.house_image, "Commercial Office Space", "200000", "190000", "Includes Parking"),
-        Product(R.drawable.house_image, "Commercial Office Space", "200000", "190000", "Includes Parking")
+        Product(
+            R.drawable.house_image,
+            "Commercial Office Space",
+            "200000",
+            "190000",
+            "Includes Parking"
+        ),
+        Product(
+            R.drawable.house_image,
+            "Commercial Office Space",
+            "200000",
+            "190000",
+            "Includes Parking"
+        ),
+        Product(
+            R.drawable.house_image,
+            "Commercial Office Space",
+            "200000",
+            "190000",
+            "Includes Parking"
+        )
     )
 
-    LazyColumn(
+    Box(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
             .windowInsetsPadding(WindowInsets.statusBars)
     ) {
-        items(products) { product ->
-            ProductCard(product, navController)
+        LazyColumn(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            items(products) { product ->
+                ProductCard(product, navController)
+            }
         }
+
+        Footer(
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .padding(bottom = 0.dp)
+        )
     }
 }
+
 
 @Composable
 fun Footer(modifier: Modifier = Modifier) {
