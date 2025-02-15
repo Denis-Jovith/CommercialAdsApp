@@ -40,7 +40,7 @@ data class Product(
 
 data class CartItem(
     val product: Product,
-    var quantity: Int
+    var quantity: Int,
 )
 
 class Cart {
@@ -91,7 +91,11 @@ fun CommercialAdsApp() {
         composable("real_estate") { ProductScreenRealEstate(navController, cart) }
         composable("product_detail/{productName}") { backStackEntry ->
             val productName = backStackEntry.arguments?.getString("productName")
-            ProductDetailScreen(productName = productName ?: "", navController = navController, cart = cart)
+            ProductDetailScreen(
+                productName = productName ?: "",
+                navController = navController,
+                cart = cart
+            )
         }
         composable("cart") {
             CartScreen(cart = cart)
@@ -101,9 +105,11 @@ fun CommercialAdsApp() {
 
 @Composable
 fun HomeScreen(navController: NavController) {
-    Box(modifier = Modifier
-        .fillMaxSize()
-        .windowInsetsPadding(WindowInsets.statusBars)) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .windowInsetsPadding(WindowInsets.statusBars)
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -141,13 +147,13 @@ fun HomeScreen(navController: NavController) {
             }
 
             OutlinedButton(
-                onClick = { navController.navigate("real_estate") },
+                onClick = { navController.navigate("Computer & Accessories") },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 8.dp),
                 colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.Black)
             ) {
-                Text("Real Estate Services", fontSize = 16.sp)
+                Text("Computer & Accessories", fontSize = 16.sp)
             }
 
             Spacer(modifier = Modifier.height(32.dp))
@@ -246,7 +252,11 @@ fun ProductDetailScreen(productName: String, navController: NavController, cart:
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Text("Total Price: ${product?.discountedPrice?.toDouble()?.times(quantity)?.let { "%.2f".format(it) }}")
+            Text(
+                "Total Price: ${
+                    product?.discountedPrice?.toDouble()?.times(quantity)?.let { "%.2f".format(it) }
+                }"
+            )
 
             OutlinedButton(
                 onClick = {
@@ -376,10 +386,17 @@ fun CartScreen(cart: Cart) {
     val items = cart.getItems()
 
     Box(modifier = Modifier.fillMaxSize()) {
-        LazyColumn(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+        LazyColumn(modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)) {
             items(items) { cartItem ->
-                Row(modifier = Modifier.fillMaxWidth().padding(8.dp)) {
-                    Text("${cartItem.product.name} x${cartItem.quantity}", fontWeight = FontWeight.Bold)
+                Row(modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp)) {
+                    Text(
+                        "${cartItem.product.name} x${cartItem.quantity}",
+                        fontWeight = FontWeight.Bold
+                    )
                     Spacer(modifier = Modifier.weight(1f))
                     Text("Total: ${cartItem.product.discountedPrice.toDouble() * cartItem.quantity}")
                 }
